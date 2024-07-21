@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl4dirkpqmnol"]
+
+[ext_resource type="Script" path="res://test/systems/simulation/SimulationTest.gd" id="1_2uhiq"]
+[ext_resource type="Script" path="res://src/systems/simulation/Simulation.gd" id="1_y08g4"]
+
+[node name="SimulationTest" type="Node" node_paths=PackedStringArray("simulation", "ticks_value_label", "ticks_per_second_value_label", "pause_button")]
+script = ExtResource("1_2uhiq")
+simulation = NodePath("Simulation")
+ticks_value_label = NodePath("VBoxContainer/TicksPanelContainer/TicksHBoxContainer/TicksValueLabel")
+ticks_per_second_value_label = NodePath("VBoxContainer/TicksPerSecondPanelContainer/TicksPerSecondHBoxContainer/TicksPerSecondValueLabel")
+pause_button = NodePath("VBoxContainer/PauseButton")
+
+[node name="Simulation" type="Node" parent="."]
+script = ExtResource("1_y08g4")
+paused = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -140.0
+offset_right = 117.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TicksPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TicksHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TicksPanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TicksLabel" type="Label" parent="VBoxContainer/TicksPanelContainer/TicksHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ticks:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TicksValueLabel" type="Label" parent="VBoxContainer/TicksPanelContainer/TicksHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+vertical_alignment = 1
+
+[node name="TicksPerSecondPanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TicksPerSecondHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TicksPerSecondPanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TicksPerSecondLabel" type="Label" parent="VBoxContainer/TicksPerSecondPanelContainer/TicksPerSecondHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ticks/s:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TicksPerSecondValueLabel" type="Label" parent="VBoxContainer/TicksPerSecondPanelContainer/TicksPerSecondHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pause"
