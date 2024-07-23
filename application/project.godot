@@ -26,9 +26,15 @@ project/assembly_name="Automation Game"
 
 naming/scene_name_casing=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/automation_game_data_importer/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
+"res://addons/": "gray",
+"res://data/": "pink",
 "res://src/": "red",
 "res://test/": "teal"
 }
