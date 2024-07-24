@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="ProcessorData" load_steps=12 format=3 uid="uid://h1ymrklja3kd"]
+
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/IngredientData.gd" id="1_344pf"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/ProcessorData.gd" id="1_pv8jd"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/QuantitativeData.gd" id="2_gvm8f"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/RecipeData.gd" id="3_cckr1"]
+
+[sub_resource type="Resource" id="Resource_l8hou"]
+resource_name = "Labor"
+script = ExtResource("1_344pf")
+type = 0
+id = "labor"
+
+[sub_resource type="Resource" id="Resource_w4ens"]
+script = ExtResource("2_gvm8f")
+ingredient = SubResource("Resource_l8hou")
+quantity = 20
+
+[sub_resource type="Resource" id="Resource_p0dcj"]
+resource_name = "Water"
+script = ExtResource("1_344pf")
+type = 1
+id = "water"
+
+[sub_resource type="Resource" id="Resource_1bqat"]
+script = ExtResource("2_gvm8f")
+ingredient = SubResource("Resource_p0dcj")
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_irryb"]
+resource_name = "Wheat"
+script = ExtResource("1_344pf")
+type = 2
+id = "wheat"
+
+[sub_resource type="Resource" id="Resource_wgmp0"]
+script = ExtResource("2_gvm8f")
+ingredient = SubResource("Resource_irryb")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_1t7ha"]
+resource_name = "FarmWheat"
+script = ExtResource("3_cckr1")
+inputs = Array[ExtResource("2_gvm8f")]([SubResource("Resource_w4ens"), SubResource("Resource_1bqat")])
+outputs = Array[ExtResource("2_gvm8f")]([SubResource("Resource_wgmp0")])
+ticks = 20
+id = "farmWheat"
+
+[resource]
+resource_name = "Field"
+script = ExtResource("1_pv8jd")
+recipes = Array[ExtResource("3_cckr1")]([SubResource("Resource_1t7ha")])
+id = "field"

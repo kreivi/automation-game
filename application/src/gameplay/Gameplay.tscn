@@ -1,0 +1,168 @@
+[gd_scene load_steps=26 format=3 uid="uid://c7j5jsgjo10tw"]
+
+[ext_resource type="Script" path="res://src/systems/simulation/Simulation.gd" id="1_m6caa"]
+[ext_resource type="Script" path="res://src/gameplay/entities/processor/Processor.gd" id="2_7oxni"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/IngredientData.gd" id="3_8jbcy"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/QuantitativeData.gd" id="4_7025s"]
+[ext_resource type="PackedScene" uid="uid://cdjof5xak0hq5" path="res://src/gameplay/entities/processor/io_slot/IOSlot.tscn" id="4_l12s6"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/RecipeData.gd" id="5_c2b2x"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/ProcessorData.gd" id="6_n6jyn"]
+
+[sub_resource type="Resource" id="Resource_jtfas"]
+resource_name = "Labor"
+script = ExtResource("3_8jbcy")
+type = 0
+id = "labor"
+
+[sub_resource type="Resource" id="Resource_1ej6j"]
+script = ExtResource("4_7025s")
+ingredient = SubResource("Resource_jtfas")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_f6sbf"]
+resource_name = "ProvideLabor"
+script = ExtResource("5_c2b2x")
+inputs = Array[ExtResource("4_7025s")]([])
+outputs = Array[ExtResource("4_7025s")]([SubResource("Resource_1ej6j")])
+ticks = 1
+id = "provideLabor"
+
+[sub_resource type="Resource" id="Resource_ookhi"]
+resource_name = "Town"
+script = ExtResource("6_n6jyn")
+recipes = Array[ExtResource("5_c2b2x")]([SubResource("Resource_f6sbf")])
+id = "town"
+
+[sub_resource type="Resource" id="Resource_0412l"]
+resource_name = "Labor"
+script = ExtResource("3_8jbcy")
+type = 0
+id = "labor"
+
+[sub_resource type="Resource" id="Resource_mglcr"]
+script = ExtResource("4_7025s")
+ingredient = SubResource("Resource_0412l")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_2y0u3"]
+resource_name = "Water"
+script = ExtResource("3_8jbcy")
+type = 1
+id = "water"
+
+[sub_resource type="Resource" id="Resource_t4xva"]
+script = ExtResource("4_7025s")
+ingredient = SubResource("Resource_2y0u3")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_mgd7y"]
+resource_name = "CollectWater"
+script = ExtResource("5_c2b2x")
+inputs = Array[ExtResource("4_7025s")]([SubResource("Resource_mglcr")])
+outputs = Array[ExtResource("4_7025s")]([SubResource("Resource_t4xva")])
+ticks = 10
+id = "collectWater"
+
+[sub_resource type="Resource" id="Resource_hyxeo"]
+resource_name = "Well"
+script = ExtResource("6_n6jyn")
+recipes = Array[ExtResource("5_c2b2x")]([SubResource("Resource_mgd7y")])
+id = "well"
+
+[sub_resource type="Resource" id="Resource_72p2t"]
+resource_name = "Labor"
+script = ExtResource("3_8jbcy")
+type = 0
+id = "labor"
+
+[sub_resource type="Resource" id="Resource_mgu2x"]
+script = ExtResource("4_7025s")
+ingredient = SubResource("Resource_72p2t")
+quantity = 20
+
+[sub_resource type="Resource" id="Resource_o0oj8"]
+resource_name = "Water"
+script = ExtResource("3_8jbcy")
+type = 1
+id = "water"
+
+[sub_resource type="Resource" id="Resource_ojfl8"]
+script = ExtResource("4_7025s")
+ingredient = SubResource("Resource_o0oj8")
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_4alem"]
+resource_name = "Wheat"
+script = ExtResource("3_8jbcy")
+type = 2
+id = "wheat"
+
+[sub_resource type="Resource" id="Resource_ti7ag"]
+script = ExtResource("4_7025s")
+ingredient = SubResource("Resource_4alem")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_3lgog"]
+resource_name = "FarmWheat"
+script = ExtResource("5_c2b2x")
+inputs = Array[ExtResource("4_7025s")]([SubResource("Resource_mgu2x"), SubResource("Resource_ojfl8")])
+outputs = Array[ExtResource("4_7025s")]([SubResource("Resource_ti7ag")])
+ticks = 20
+id = "farmWheat"
+
+[sub_resource type="Resource" id="Resource_448c1"]
+resource_name = "Field"
+script = ExtResource("6_n6jyn")
+recipes = Array[ExtResource("5_c2b2x")]([SubResource("Resource_3lgog")])
+id = "field"
+
+[node name="Gameplay" type="Node"]
+
+[node name="Simulation" type="Node" parent="."]
+script = ExtResource("1_m6caa")
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+snapping_distance = 10
+show_grid_buttons = false
+show_arrange_button = false
+
+[node name="Processor" type="GraphNode" parent="GraphEdit"]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 193.0
+offset_right = 499.0
+offset_bottom = 399.0
+mouse_filter = 1
+position_offset = Vector2(275, 193)
+script = ExtResource("2_7oxni")
+data = SubResource("Resource_ookhi")
+ioslot_scene = ExtResource("4_l12s6")
+
+[node name="Processor2" type="GraphNode" parent="GraphEdit"]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 203.0
+offset_right = 858.0
+offset_bottom = 400.0
+mouse_filter = 1
+position_offset = Vector2(605, 203)
+script = ExtResource("2_7oxni")
+data = SubResource("Resource_hyxeo")
+ioslot_scene = ExtResource("4_l12s6")
+
+[node name="Processor3" type="GraphNode" parent="GraphEdit"]
+layout_mode = 0
+offset_left = 968.0
+offset_top = 201.0
+offset_right = 1269.0
+offset_bottom = 426.0
+mouse_filter = 1
+position_offset = Vector2(968, 201)
+script = ExtResource("2_7oxni")
+data = SubResource("Resource_448c1")
+ioslot_scene = ExtResource("4_l12s6")

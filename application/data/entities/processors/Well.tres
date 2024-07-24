@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ProcessorData" load_steps=10 format=3 uid="uid://b5dvswgpcspwe"]
+
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/IngredientData.gd" id="1_ex82e"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/ProcessorData.gd" id="1_knmdh"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/QuantitativeData.gd" id="2_3dp6k"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/RecipeData.gd" id="3_6exhy"]
+
+[sub_resource type="Resource" id="Resource_eig1j"]
+resource_name = "Labor"
+script = ExtResource("1_ex82e")
+type = 0
+id = "labor"
+
+[sub_resource type="Resource" id="Resource_55tr3"]
+script = ExtResource("2_3dp6k")
+ingredient = SubResource("Resource_eig1j")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_l2ox6"]
+resource_name = "Water"
+script = ExtResource("1_ex82e")
+type = 1
+id = "water"
+
+[sub_resource type="Resource" id="Resource_woy88"]
+script = ExtResource("2_3dp6k")
+ingredient = SubResource("Resource_l2ox6")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_vf8jl"]
+resource_name = "CollectWater"
+script = ExtResource("3_6exhy")
+inputs = Array[ExtResource("2_3dp6k")]([SubResource("Resource_55tr3")])
+outputs = Array[ExtResource("2_3dp6k")]([SubResource("Resource_woy88")])
+ticks = 10
+id = "collectWater"
+
+[resource]
+resource_name = "Well"
+script = ExtResource("1_knmdh")
+recipes = Array[ExtResource("3_6exhy")]([SubResource("Resource_vf8jl")])
+id = "well"

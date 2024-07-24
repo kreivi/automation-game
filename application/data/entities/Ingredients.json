@@ -1,0 +1,17 @@
+{
+	"allIds": ["labor", "water", "wheat"],
+	"byId": {
+		"labor": {
+			"id": "labor",
+			"type": 0
+		},
+		"water": {
+			"id": "water",
+			"type": 1
+		},
+		"wheat": {
+			"id": "wheat",
+			"type": 2
+		}
+	}
+}

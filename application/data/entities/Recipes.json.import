@@ -1,0 +1,17 @@
+[remap]
+
+importer="automationgame.data.importer.recipes"
+type="Resource"
+uid="uid://x2uevjpsjsqu"
+path="res://.godot/imported/Recipes.json-5f89d1ead5e74564d2ab93746d4fff77.md5"
+
+[deps]
+
+source_file="res://data/entities/Recipes.json"
+dest_files=["res://.godot/imported/Recipes.json-5f89d1ead5e74564d2ab93746d4fff77.md5"]
+
+[params]
+
+WriteDirectory="res://data/entities/recipes"
+IngredientsDirectory="res://data/entities/ingredients"
+FullImport=true

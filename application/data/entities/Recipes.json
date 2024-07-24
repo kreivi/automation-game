@@ -1,0 +1,52 @@
+{
+	"allIds": ["provideLabor", "collectWater", "farmWheat"],
+	"byId": {
+		"provideLabor": {
+			"id": "provideLabor",
+			"ticks": 1,
+			"inputs": [],
+			"outputs": [
+				{
+					"id": "labor",
+					"quantity": 1
+				}
+			]
+		},
+		"collectWater": {
+			"id": "collectWater",
+			"ticks": 10,
+			"inputs": [
+				{
+					"id": "labor",
+					"quantity": 10
+				}
+			],
+			"outputs": [
+				{
+					"id": "water",
+					"quantity": 1
+				}
+			]
+		},
+		"farmWheat": {
+			"id": "farmWheat",
+			"ticks": 20,
+			"inputs": [
+				{
+					"id": "labor",
+					"quantity": 20
+				},
+				{
+					"id": "water",
+					"quantity": 5
+				}
+			],
+			"outputs": [
+				{
+					"id": "wheat",
+					"quantity": 1
+				}
+			]
+		}
+	}
+}

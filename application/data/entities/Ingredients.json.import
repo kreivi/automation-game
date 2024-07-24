@@ -1,0 +1,16 @@
+[remap]
+
+importer="automationgame.data.importer.ingredients"
+type="Resource"
+uid="uid://d3kkf2klxq5k5"
+path="res://.godot/imported/Ingredients.json-23185b871973ba3cf7b980186d7b7fd2.md5"
+
+[deps]
+
+source_file="res://data/entities/Ingredients.json"
+dest_files=["res://.godot/imported/Ingredients.json-23185b871973ba3cf7b980186d7b7fd2.md5"]
+
+[params]
+
+WriteDirectory="res://data/entities/ingredients"
+FullImport=true

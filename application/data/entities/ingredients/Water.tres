@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=2 format=3 uid="uid://dkfhs514gxkns"]
+
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/IngredientData.gd" id="1_38hc3"]
+
+[resource]
+resource_name = "Water"
+script = ExtResource("1_38hc3")
+type = 1
+id = "water"

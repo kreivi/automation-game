@@ -1,0 +1,23 @@
+{
+	"allIds": ["town", "well", "field"],
+	"byId": {
+		"town": {
+			"id": "town",
+			"recipes": [
+				"provideLabor"
+			]
+		},
+		"well": {
+			"id": "well",
+			"recipes": [
+				"collectWater"
+			]
+		},
+		"field": {
+			"id": "field",
+			"recipes": [
+				"farmWheat"
+			]
+		}
+	}
+}

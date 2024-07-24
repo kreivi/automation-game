@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdjof5xak0hq5"]
+
+[ext_resource type="Script" path="res://src/gameplay/entities/processor/io_slot/IOSlot.gd" id="1_djmcn"]
+
+[node name="IOSlot" type="HBoxContainer" node_paths=PackedStringArray("input_container", "input_label", "input_progress", "output_container", "output_label", "output_progress")]
+custom_minimum_size = Vector2(0, 24)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_djmcn")
+input_container = NodePath("Input/InputContainer")
+input_label = NodePath("Input/InputContainer/Label")
+input_progress = NodePath("Input/InputContainer/ProgressBar")
+output_container = NodePath("Output/OutputContainer")
+output_label = NodePath("Output/OutputContainer/Label")
+output_progress = NodePath("Output/OutputContainer/ProgressBar")
+
+[node name="Input" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InputContainer" type="Control" parent="Input"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Input/InputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Input/InputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Input"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IOSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="Output" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OutputContainer" type="Control" parent="Output"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Output/OutputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Output/OutputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Output"
+horizontal_alignment = 1
+vertical_alignment = 1
