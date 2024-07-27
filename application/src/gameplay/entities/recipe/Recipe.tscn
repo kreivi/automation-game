@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm8qspgvr4iny"]
+
+[ext_resource type="Script" path="res://src/gameplay/entities/recipe/Recipe.gd" id="1_wtuop"]
+[ext_resource type="PackedScene" uid="uid://c4r2u28wg8cus" path="res://src/gameplay/entities/processor/slot/input/InputSlot.tscn" id="2_22cp3"]
+[ext_resource type="PackedScene" uid="uid://bdmx0nl2vrbe0" path="res://src/gameplay/entities/processor/slot/output/OutputSlot.tscn" id="3_02x37"]
+
+[node name="Recipe" type="HBoxContainer" node_paths=PackedStringArray("inputs_container", "outputs_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_wtuop")
+input_slot_scene = ExtResource("2_22cp3")
+output_slot_scene = ExtResource("3_02x37")
+inputs_container = NodePath("InputPanelContainer/InputContainer")
+outputs_container = NodePath("OutputPanelContainer/OutputContainer")
+
+[node name="InputPanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InputContainer" type="VBoxContainer" parent="InputPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="OutputPanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OutputContainer" type="VBoxContainer" parent="OutputPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1

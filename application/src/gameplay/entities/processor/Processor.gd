@@ -12,89 +12,38 @@ class_name Processor extends Entity
 
 @export var data: ProcessorData
 
-@export var ioslot_scene: PackedScene
+@export var recipe_scene: PackedScene
 
-#region Node interface
+@export_group("ControlComponents")
+@export var title: Label
+@export var recipes_container: Container
+
+#region Node Interface
 
 func _ready() -> void:
 	super._ready()
-	title = data.id
-	_init_slots()
+	assert(data, "Assign ProcessorData to 'data' in the Inspector.")
+	assert(title, "Assign Label to 'title' in the Inspector.")
+	title.text = data.id
+	_init_recipes()
 	pass
 
-#endregion Node interface
+#endregion Node Interface
 
-#region Entity interface
+#region Private Methods
 
-func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void:
-	super._on_simulation_ticked(ticks, ticks_per_second)
-	_process_recipes(ticks)
-	pass
-
-#endregion Entity interface
-
-
-func _init_slots() -> void:
-	for recipe in data.recipes:
-		_init_slot(recipe)
+func _init_recipes() -> void:
+	for r in data.recipes:
+		_init_recipe(r)
 	pass
 
 
-func _init_slot(recipe: RecipeData) -> void:
-	var slots := maxi(recipe.inputs.size(), recipe.outputs.size())
-	for i in range(slots):
-		var ioslot := ioslot_scene.instantiate() as IOSlot
-		ioslot.recipe_id = recipe.id
-		if i < recipe.inputs.size():
-			var input := recipe.inputs[i]
-			ioslot.input_requirement = input
-			set_slot_enabled_left(i, true)
-			set_slot_type_left(i, input.ingredient.type)
-			pass
-		if i < recipe.outputs.size():
-			var output := recipe.outputs[i]
-			ioslot.output_requirement = output
-			set_slot_enabled_right(i, true)
-			set_slot_type_right(i, output.ingredient.type)
-			pass
-		add_child(ioslot)
-		pass
+func _init_recipe(recipe: RecipeData) -> void:
+	var instance := recipe_scene.instantiate() as Recipe
+	instance.data = recipe
+	instance.name = recipe.id
+	recipes_container.add_child(instance)
 	pass
 
 
-func _process_recipes(ticks: int) -> void:
-	for recipe in data.recipes:
-		_process_recipe(recipe, ticks)
-		pass
-	pass
-
-
-func _process_recipe(recipe: RecipeData, ticks: int) -> void:
-	var slots := _get_recipe_slots(recipe.id)
-	for slot: IOSlot in slots:
-		slot.process_slot(ticks)
-		pass
-	pass
-
-
-## Returns all slots that are assosiated with the given recipe.
-func _get_recipe_slots(recipe_id: String) -> Array[IOSlot]:
-	var slots := []
-	for child: IOSlot in get_children():
-		if child is IOSlot:
-			if child.recipe_id == recipe_id:
-				slots.append(child)
-				pass
-			pass
-		pass
-	return slots
-
-
-func output_connected(port_index: int) -> void:
-	print("Processor output connected %d:%d:%d" % [port_index, get_output_port_slot(port_index), get_output_port_type(port_index)])
-	pass
-
-
-func input_connected(port_index: int) -> void:
-	print("Processor input connected %d:%d:%d" % [port_index, get_input_port_slot(port_index), get_input_port_type(port_index)])
-	pass
+#endregion Private Methods

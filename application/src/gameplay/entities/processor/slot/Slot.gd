@@ -7,29 +7,29 @@
 #
 # You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-## Base class for all placeable entities in the game.
-class_name Entity extends GraphElement
+## 
+class_name Slot extends Control
 
-var graph_edit: GraphEdit
+@export var data: QuantitativeData
 
-#region Node Interface
+@export_group("ControlComponents")
+@export var connection_button: BaseButton
+@export var ingredient_label: Label
 
 func _ready() -> void:
-	if not graph_edit: graph_edit = get_parent() as GraphEdit
-	Events.simulation_ticked.connect(_on_simulation_ticked)
-	Events.simulation_paused.connect(_on_simulation_paused)
+	if connection_button.button_down.connect(_on_connection_started):
+		push_warning("Failed to connect 'button_down' signal")
+		pass
+	if connection_button.button_up.connect(_on_connection_ended):
+		push_warning("Failed to connect 'button_up' signal")
+		pass
+	ingredient_label.text = data.ingredient.id
 	pass
 
-#endregion Node Interface
+func _on_connection_started() -> void:
+	print("%s connection started" % name)
+	pass
 
-#region Protected Methods
-
-## Called when the simulation progresses.
-@warning_ignore("unused_parameter")
-func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void: pass
-
-## Called when the simulation is paused/unpaused.
-@warning_ignore("unused_parameter")
-func _on_simulation_paused(paused: bool) -> void: pass
-
-#endregion Protected Methods
+func _on_connection_ended() -> void:
+	print("%s connection ended" % name)
+	pass
