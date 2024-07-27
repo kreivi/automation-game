@@ -1,53 +1,88 @@
-[gd_resource type="Resource" script_class="ProcessorData" load_steps=12 format=3 uid="uid://h1ymrklja3kd"]
+[gd_resource type="Resource" script_class="ProcessorData" load_steps=18 format=3 uid="uid://dg0axtaotiipv"]
 
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/IngredientData.gd" id="1_344pf"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/ProcessorData.gd" id="1_pv8jd"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/QuantitativeData.gd" id="2_gvm8f"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/RecipeData.gd" id="3_cckr1"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_6sf35"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_0bek6"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_0e8s2"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/ProcessorData.gd" id="4_jxyj0"]
 
-[sub_resource type="Resource" id="Resource_l8hou"]
+[sub_resource type="Resource" id="Resource_ihfi3"]
 resource_name = "Labor"
-script = ExtResource("1_344pf")
+script = ExtResource("1_6sf35")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_w4ens"]
-script = ExtResource("2_gvm8f")
-ingredient = SubResource("Resource_l8hou")
+[sub_resource type="Resource" id="Resource_axpyv"]
+script = ExtResource("2_0bek6")
+ingredient = SubResource("Resource_ihfi3")
 quantity = 20
 
-[sub_resource type="Resource" id="Resource_p0dcj"]
+[sub_resource type="Resource" id="Resource_7txyn"]
 resource_name = "Water"
-script = ExtResource("1_344pf")
+script = ExtResource("1_6sf35")
 type = 1
 id = "water"
 
-[sub_resource type="Resource" id="Resource_1bqat"]
-script = ExtResource("2_gvm8f")
-ingredient = SubResource("Resource_p0dcj")
-quantity = 5
+[sub_resource type="Resource" id="Resource_jtrvv"]
+script = ExtResource("2_0bek6")
+ingredient = SubResource("Resource_7txyn")
+quantity = 10
 
-[sub_resource type="Resource" id="Resource_irryb"]
+[sub_resource type="Resource" id="Resource_k02u4"]
 resource_name = "Wheat"
-script = ExtResource("1_344pf")
+script = ExtResource("1_6sf35")
 type = 2
 id = "wheat"
 
-[sub_resource type="Resource" id="Resource_wgmp0"]
-script = ExtResource("2_gvm8f")
-ingredient = SubResource("Resource_irryb")
+[sub_resource type="Resource" id="Resource_tcr4c"]
+script = ExtResource("2_0bek6")
+ingredient = SubResource("Resource_k02u4")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_tonkl"]
+resource_name = "Labor"
+script = ExtResource("1_6sf35")
+type = 0
+id = "labor"
+
+[sub_resource type="Resource" id="Resource_fl2wj"]
+script = ExtResource("2_0bek6")
+ingredient = SubResource("Resource_tonkl")
+quantity = 20
+
+[sub_resource type="Resource" id="Resource_xdcyr"]
+resource_name = "Water"
+script = ExtResource("1_6sf35")
+type = 1
+id = "water"
+
+[sub_resource type="Resource" id="Resource_tti46"]
+script = ExtResource("2_0bek6")
+ingredient = SubResource("Resource_xdcyr")
+quantity = 5
+
+[sub_resource type="Resource" id="Resource_rdqkq"]
+resource_name = "Wheat"
+script = ExtResource("1_6sf35")
+type = 2
+id = "wheat"
+
+[sub_resource type="Resource" id="Resource_msbra"]
+script = ExtResource("2_0bek6")
+ingredient = SubResource("Resource_rdqkq")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_1t7ha"]
+[sub_resource type="Resource" id="Resource_fiprf"]
 resource_name = "FarmWheat"
-script = ExtResource("3_cckr1")
-inputs = Array[ExtResource("2_gvm8f")]([SubResource("Resource_w4ens"), SubResource("Resource_1bqat")])
-outputs = Array[ExtResource("2_gvm8f")]([SubResource("Resource_wgmp0")])
+script = ExtResource("3_0e8s2")
+inputs = Array[ExtResource("2_0bek6")]([SubResource("Resource_fl2wj"), SubResource("Resource_tti46")])
+outputs = Array[ExtResource("2_0bek6")]([SubResource("Resource_msbra")])
 ticks = 20
 id = "farmWheat"
 
 [resource]
 resource_name = "Field"
-script = ExtResource("1_pv8jd")
-recipes = Array[ExtResource("3_cckr1")]([SubResource("Resource_1t7ha")])
+script = ExtResource("4_jxyj0")
+recipes = Array[ExtResource("3_0e8s2")]([SubResource("Resource_fiprf")])
+input_storages = Array[ExtResource("2_0bek6")]([SubResource("Resource_axpyv"), SubResource("Resource_jtrvv")])
+output_storages = Array[ExtResource("2_0bek6")]([SubResource("Resource_tcr4c")])
 id = "field"

@@ -60,3 +60,29 @@ static func get_by_id(data: Dictionary, id: String) -> Dictionary:
 ## Consistent way to convert id to resource name.
 static func id_to_resource_name(id: String) -> String:
 	return id.capitalize().replace(" ", "")
+
+
+## Parse the quantitative data objects from the given data array. Ingredients path is used to load the ingredients
+## dependencies for the recipe.
+static func parse_quantitatives(data: Array, ingredients_path: String) -> Array[QuantitativeData]:
+	var result: Array[QuantitativeData] = []
+	for item in data:
+		var qd := QuantitativeData.new()
+		for key in item.keys():
+			if key == "id":
+				qd.ingredient = AutomationGameDataImporterUtils.get_ingredient_by_id(item.get(key), ingredients_path)
+				continue
+			qd.set(key, item.get(key))
+			pass
+		result.append(qd)
+		pass
+	return result
+
+## Get ingredient by id from the given ingredients path.
+static func get_ingredient_by_id(id: String, ingredients_path: String) -> IngredientData:
+	var path := ingredients_path.path_join(AutomationGameDataImporterUtils.id_to_resource_name(id) + ".tres")
+	var resource := ResourceLoader.load(path, "Resource", ResourceLoader.CACHE_MODE_IGNORE)
+	if not resource:
+		printerr("Failed to load ingredient: " + id)
+		return null
+	return resource as IngredientData

@@ -14,20 +14,33 @@ class_name Processor extends Entity
 
 @export var ioslot_scene: PackedScene
 
+#region Node interface
+
 func _ready() -> void:
 	super._ready()
 	title = data.id
-	_init_recipes()
+	_init_slots()
 	pass
 
+#endregion Node interface
 
-func _init_recipes() -> void:
+#region Entity interface
+
+func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void:
+	super._on_simulation_ticked(ticks, ticks_per_second)
+	_process_recipes(ticks)
+	pass
+
+#endregion Entity interface
+
+
+func _init_slots() -> void:
 	for recipe in data.recipes:
-		_init_recipe(recipe)
+		_init_slot(recipe)
 	pass
 
 
-func _init_recipe(recipe: RecipeData) -> void:
+func _init_slot(recipe: RecipeData) -> void:
 	var slots := maxi(recipe.inputs.size(), recipe.outputs.size())
 	for i in range(slots):
 		var ioslot := ioslot_scene.instantiate() as IOSlot
@@ -45,35 +58,26 @@ func _init_recipe(recipe: RecipeData) -> void:
 			set_slot_type_right(i, output.ingredient.type)
 			pass
 		add_child(ioslot)
-	pass
-
-
-func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void:
-	super._on_simulation_ticked(ticks, ticks_per_second)
-	_process_recipes(ticks)
+		pass
 	pass
 
 
 func _process_recipes(ticks: int) -> void:
 	for recipe in data.recipes:
 		_process_recipe(recipe, ticks)
+		pass
 	pass
 
 
 func _process_recipe(recipe: RecipeData, ticks: int) -> void:
 	var slots := _get_recipe_slots(recipe.id)
-	var inputs := []
-	var outputs := []
-	for slot in slots:
-		if slot.input_requirement:
-			inputs.append(slot)
-			pass
-		if slot.output_requirement:
-			outputs.append(slot)
-			pass
+	for slot: IOSlot in slots:
+		slot.process_slot(ticks)
+		pass
 	pass
 
 
+## Returns all slots that are assosiated with the given recipe.
 func _get_recipe_slots(recipe_id: String) -> Array[IOSlot]:
 	var slots := []
 	for child: IOSlot in get_children():
@@ -84,3 +88,13 @@ func _get_recipe_slots(recipe_id: String) -> Array[IOSlot]:
 			pass
 		pass
 	return slots
+
+
+func output_connected(port_index: int) -> void:
+	print("Processor output connected %d:%d:%d" % [port_index, get_output_port_slot(port_index), get_output_port_type(port_index)])
+	pass
+
+
+func input_connected(port_index: int) -> void:
+	print("Processor input connected %d:%d:%d" % [port_index, get_input_port_slot(port_index), get_input_port_type(port_index)])
+	pass

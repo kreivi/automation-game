@@ -1,12 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://c7j5jsgjo10tw"]
+[gd_scene load_steps=27 format=3 uid="uid://c7j5jsgjo10tw"]
 
 [ext_resource type="Script" path="res://src/systems/simulation/Simulation.gd" id="1_m6caa"]
 [ext_resource type="Script" path="res://src/gameplay/entities/processor/Processor.gd" id="2_7oxni"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/IngredientData.gd" id="3_8jbcy"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/QuantitativeData.gd" id="4_7025s"]
+[ext_resource type="Script" path="res://src/gameplay/game_board/GameBoard.gd" id="2_niwty"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="3_8jbcy"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="4_7025s"]
 [ext_resource type="PackedScene" uid="uid://cdjof5xak0hq5" path="res://src/gameplay/entities/processor/io_slot/IOSlot.tscn" id="4_l12s6"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/RecipeData.gd" id="5_c2b2x"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/data_classes/ProcessorData.gd" id="6_n6jyn"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="5_c2b2x"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/ProcessorData.gd" id="6_n6jyn"]
 
 [sub_resource type="Resource" id="Resource_jtfas"]
 resource_name = "Labor"
@@ -121,7 +122,7 @@ id = "field"
 [node name="Simulation" type="Node" parent="."]
 script = ExtResource("1_m6caa")
 
-[node name="GraphEdit" type="GraphEdit" parent="."]
+[node name="GameBoard" type="GraphEdit" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -130,8 +131,9 @@ grow_vertical = 2
 snapping_distance = 10
 show_grid_buttons = false
 show_arrange_button = false
+script = ExtResource("2_niwty")
 
-[node name="Processor" type="GraphNode" parent="GraphEdit"]
+[node name="Processor" type="GraphNode" parent="GameBoard"]
 layout_mode = 0
 offset_left = 275.0
 offset_top = 193.0
@@ -143,7 +145,7 @@ script = ExtResource("2_7oxni")
 data = SubResource("Resource_ookhi")
 ioslot_scene = ExtResource("4_l12s6")
 
-[node name="Processor2" type="GraphNode" parent="GraphEdit"]
+[node name="Processor2" type="GraphNode" parent="GameBoard"]
 layout_mode = 0
 offset_left = 605.0
 offset_top = 203.0
@@ -155,7 +157,7 @@ script = ExtResource("2_7oxni")
 data = SubResource("Resource_hyxeo")
 ioslot_scene = ExtResource("4_l12s6")
 
-[node name="Processor3" type="GraphNode" parent="GraphEdit"]
+[node name="Processor3" type="GraphNode" parent="GameBoard"]
 layout_mode = 0
 offset_left = 968.0
 offset_top = 201.0

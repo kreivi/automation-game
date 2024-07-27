@@ -7,26 +7,13 @@
 #
 # You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-## Base class for all placeable entities in the game.
-class_name Entity extends GraphNode
+## Recipe defines what inputs needs to satisfied to produce the outputs.
+class_name RecipeData extends EntityData
 
-#region Node Interface
 
-func _ready() -> void:
-	Events.simulation_ticked.connect(_on_simulation_ticked)
-	Events.simulation_paused.connect(_on_simulation_paused)
-	pass
-
-#endregion Node Interface
-
-#region Protected Methods
-
-## Called when the simulation progresses.
-@warning_ignore("unused_parameter")
-func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void: pass
-
-## Called when the simulation is paused/unpaused.
-@warning_ignore("unused_parameter")
-func _on_simulation_paused(paused: bool) -> void: pass
-
-#endregion Protected Methods
+## Input ingredients of the recipe.
+@export var inputs: Array[QuantitativeData] = []
+## Output ingredients of the recipe.
+@export var outputs: Array[QuantitativeData] = []
+## The time it takes to craft the recipe.
+@export var ticks := 0

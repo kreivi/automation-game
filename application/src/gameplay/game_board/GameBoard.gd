@@ -7,26 +7,18 @@
 #
 # You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-## Base class for all placeable entities in the game.
-class_name Entity extends GraphNode
-
-#region Node Interface
+## 
+class_name GameBoard extends GraphEdit
 
 func _ready() -> void:
-	Events.simulation_ticked.connect(_on_simulation_ticked)
-	Events.simulation_paused.connect(_on_simulation_paused)
+	connection_request.connect(_on_connection_request)
 	pass
 
-#endregion Node Interface
 
-#region Protected Methods
-
-## Called when the simulation progresses.
-@warning_ignore("unused_parameter")
-func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void: pass
-
-## Called when the simulation is paused/unpaused.
-@warning_ignore("unused_parameter")
-func _on_simulation_paused(paused: bool) -> void: pass
-
-#endregion Protected Methods
+func _on_connection_request(from: StringName, from_port: int, to: StringName, to_port: int) -> void:
+	print("Connection request from %s:%d to %s:%d" % [from, from_port, to, to_port])
+	var from_processor := find_child(from) as Processor
+	var to_processor := find_child(to) as Processor
+	from_processor.output_connected(from_port)
+	to_processor.input_connected(to_port)
+	pass

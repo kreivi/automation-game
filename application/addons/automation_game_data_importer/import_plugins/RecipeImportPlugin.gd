@@ -106,10 +106,10 @@ func _import(source_file: String, save_path: String, options: Dictionary, platfo
 		var entity := RecipeData.new()
 		for key in data.keys():
 			if key == "inputs":
-				entity.inputs = _parse_quantitatives(data.get(key), ingredients_dir)
+				entity.inputs = AutomationGameDataImporterUtils.parse_quantitatives(data.get(key), ingredients_dir)
 				continue
 			if key == "outputs":
-				entity.outputs = _parse_quantitatives(data.get(key), ingredients_dir)
+				entity.outputs = AutomationGameDataImporterUtils.parse_quantitatives(data.get(key), ingredients_dir)
 				continue
 			entity.set(key, data.get(key))
 			pass
@@ -132,32 +132,5 @@ func _is_valid_data(data: Dictionary) -> bool:
 		data.has("ticks") and data.get("ticks") is float and \
 		data.has("inputs") and data.get("inputs") is Array and \
 		data.has("outputs") and data.get("outputs") is Array
-
-
-## Parse the quantitative data objects from the given data array. Ingredients path is used to load the ingredients
-## dependencies for the recipe.
-func _parse_quantitatives(data: Array, ingredients_path: String) -> Array[QuantitativeData]:
-	var result: Array[QuantitativeData] = []
-	for item in data:
-		var qd := QuantitativeData.new()
-		for key in item.keys():
-			if key == "id":
-				qd.ingredient = _get_ingredient_by_id(item.get(key), ingredients_path)
-				continue
-			qd.set(key, item.get(key))
-			pass
-		result.append(qd)
-		pass
-	return result
-
-
-## Get ingredient by id from the given ingredients path.
-func _get_ingredient_by_id(id: String, ingredients_path: String) -> IngredientData:
-	var path := ingredients_path.path_join(AutomationGameDataImporterUtils.id_to_resource_name(id) + ".tres")
-	var resource := ResourceLoader.load(path, "Resource", ResourceLoader.CACHE_MODE_IGNORE)
-	if not resource:
-		printerr("Failed to load ingredient: " + id)
-		return null
-	return resource as IngredientData
 
 #endregion Private Methods

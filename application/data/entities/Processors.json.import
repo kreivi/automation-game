@@ -13,5 +13,6 @@ dest_files=["res://.godot/imported/Processors.json-c3b817189a8b1adf0ce432ee58b50
 [params]
 
 WriteDirectory="res://data/entities/processors"
+IngredientsDirectory="res://data/entities/ingredients"
 RecipesDirectory="res://data/entities/recipes"
 FullImport=true

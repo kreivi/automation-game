@@ -7,26 +7,13 @@
 #
 # You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-## Base class for all placeable entities in the game.
-class_name Entity extends GraphNode
+# Base data type for all data sentities.
+class_name EntityData extends Resource
 
-#region Node Interface
-
-func _ready() -> void:
-	Events.simulation_ticked.connect(_on_simulation_ticked)
-	Events.simulation_paused.connect(_on_simulation_paused)
-	pass
-
-#endregion Node Interface
-
-#region Protected Methods
-
-## Called when the simulation progresses.
-@warning_ignore("unused_parameter")
-func _on_simulation_ticked(ticks: int, ticks_per_second: float) -> void: pass
-
-## Called when the simulation is paused/unpaused.
-@warning_ignore("unused_parameter")
-func _on_simulation_paused(paused: bool) -> void: pass
-
-#endregion Protected Methods
+# The unique identifier of the entity.
+@export var id := "":
+	set(value):
+		if value == id: return
+		id = value
+		resource_name = AutomationGameDataImporterUtils.id_to_resource_name(id)
+		pass

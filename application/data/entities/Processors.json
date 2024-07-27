@@ -3,18 +3,59 @@
 	"byId": {
 		"town": {
 			"id": "town",
+			"storages": {
+				"inputs": [],
+				"outputs": [
+					{
+						"id": "labor",
+						"quantity": 10
+					}
+				]
+			},
 			"recipes": [
 				"provideLabor"
 			]
 		},
 		"well": {
 			"id": "well",
+			"storages": {
+				"inputs": [
+					{
+						"id": "labor",
+						"quantity": 10
+					}
+				],
+				"outputs": [
+					{
+						"id": "water",
+						"quantity": 5
+					}
+				]
+			},
 			"recipes": [
 				"collectWater"
 			]
 		},
 		"field": {
 			"id": "field",
+			"storages": {
+				"inputs": [
+					{
+						"id": "labor",
+						"quantity": 20
+					},
+					{
+						"id": "water",
+						"quantity": 10
+					}
+				],
+				"outputs": [
+					{
+						"id": "wheat",
+						"quantity": 10
+					}
+				]
+			},
 			"recipes": [
 				"farmWheat"
 			]

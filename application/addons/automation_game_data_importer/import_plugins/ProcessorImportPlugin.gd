@@ -56,6 +56,12 @@ func _get_import_options(path: String, preset: int) -> Array[Dictionary]:
 					"hint_string": "The directory where the imported processors will be saved.",
 				},
 				{
+					"name": "IngredientsDirectory",
+					"default_value": "res://data/entities/ingredients",
+					"property_hint": PROPERTY_HINT_DIR,
+					"hint_string": "The directory where the imported ingredients are located.",
+				},
+				{
 					"name": "RecipesDirectory",
 					"default_value": "res://data/entities/recipes",
 					"property_hint": PROPERTY_HINT_DIR,
@@ -90,6 +96,7 @@ func _get_import_order() -> int:
 func _import(source_file: String, save_path: String, options: Dictionary, platform_variants: Array[String], gen_files: Array[String]) -> int:
 	var write_dir := options.get("WriteDirectory") as String
 	var recipes_dir := options.get("RecipesDirectory") as String
+	var ingredients_dir := options.get("IngredientsDirectory") as String
 	var recreate := options.get("FullImport", false) as bool
 	var err = AutomationGameDataImporterUtils.make_write_directory(write_dir, recreate)
 	if err != OK: 
@@ -108,6 +115,11 @@ func _import(source_file: String, save_path: String, options: Dictionary, platfo
 			if key == "recipes":
 				entity.recipes = _parse_recipes(data.get(key), recipes_dir)
 				continue
+			if key == "storages":
+				entity.input_storages = AutomationGameDataImporterUtils.parse_quantitatives(data.get(key, {}).get("inputs", []), ingredients_dir)
+				entity.output_storages = AutomationGameDataImporterUtils.parse_quantitatives(data.get(key, {}).get("outputs", []), ingredients_dir)
+				continue
+				pass
 			entity.set(key, data.get(key))
 			pass
 		err = ResourceSaver.save(entity, write_dir.path_join(entity.resource_name + ".tres"))
@@ -126,7 +138,8 @@ func _is_valid_data(data: Dictionary) -> bool:
 	return not \
 		data.is_empty() and \
 		data.has("id") and data.get("id") is String and \
-		data.has("recipes") and data.get("recipes") is Array
+		data.has("recipes") and data.get("recipes") is Array  and \
+		data.has("storages") and data.get("storages") is Dictionary
 
 
 ## Parse recipes from the given data object. Recipes path is used to load the recipes

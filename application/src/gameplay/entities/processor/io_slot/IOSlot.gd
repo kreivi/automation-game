@@ -17,6 +17,11 @@ class_name IOSlot extends HBoxContainer
 ## Slot output data requirement.
 @export var output_requirement: QuantitativeData
 
+## How much storage is available for input.
+@export var input_storage: QuantitativeData
+## How much storage is available for output.
+@export var output_storage: QuantitativeData
+
 @export_group("NodePaths")
 
 @export var input_container: Control
@@ -32,12 +37,6 @@ var current_input: QuantitativeData
 ## How much ingredients are currently in the output slot.
 var current_output: QuantitativeData
 
-## Maximum amount of ingredients that can be in the input slot.
-var maximum_input: QuantitativeData
-## Maximum amount of ingredients that can be in the output slot.
-var maximum_output: QuantitativeData
-
-
 #region Node Interface
 
 func _ready() -> void:
@@ -45,6 +44,27 @@ func _ready() -> void:
 	output_container.visible = output_requirement != null
 	input_label.text = input_requirement.ingredient.id if input_requirement else ""
 	output_label.text = output_requirement.ingredient.id if output_requirement else ""
+	current_input = QuantitativeData.new()
+	current_input.ingredient = input_requirement.ingredient if input_requirement else null
+	current_output = QuantitativeData.new()
+	current_output.ingredient = output_requirement.ingredient if output_requirement else null
+	
 	pass
 
 #endregion Node Interface
+
+#region Public Methods
+
+func process_slot(ticks: int) -> void:
+	if not input_requirement or input_requirement.quantity <= 0:
+		current_input.quantity += ticks
+		pass
+		
+	pass
+
+## Returns whether the input requirements of this slot is satisfied.
+func input_satisfied() -> bool:
+	return not input_requirement or current_input.quantity >= input_requirement.quantity
+
+
+#endregion Public Methods
