@@ -10,6 +10,9 @@
 ## 
 class_name Slot extends Control
 
+signal connection_started(Slot: Slot)
+signal connection_ended(Slot: Slot)
+
 @export var data: QuantitativeData
 
 @export_group("ControlComponents")
@@ -26,10 +29,14 @@ func _ready() -> void:
 	ingredient_label.text = data.ingredient.id
 	pass
 
+
 func _on_connection_started() -> void:
-	print("%s connection started" % name)
+	print("Slot '%s' connection started" % name)
+	connection_started.emit(self)
 	pass
 
+
 func _on_connection_ended() -> void:
-	print("%s connection ended" % name)
+	print("Slot '%s' connection ended" % name)
+	connection_ended.emit(self)
 	pass

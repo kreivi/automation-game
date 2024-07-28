@@ -36,23 +36,32 @@ func _ready() -> void:
 
 func _init_slots() -> void:
 	for i in data.inputs:
-		_init_input(i)
+		var instance := _init_input(i)
+		instance.connection_started.connect(_on_input_slot_connected)
 	for o in data.outputs:
-		_init_output(o)
+		var instance := _init_output(o)
+		instance.connection_started.connect(_on_output_slot_connected)
 	pass
 
 
-func _init_input(quantative: QuantitativeData) -> void:
+func _init_input(quantative: QuantitativeData) -> Slot:
 	var instance := input_slot_scene.instantiate() as Slot
 	instance.data = quantative
 	inputs_container.add_child(instance)
-	pass
+	return instance
 
 
-func _init_output(ingredient: QuantitativeData) -> void:
+func _init_output(ingredient: QuantitativeData) -> Slot:
 	var instance := output_slot_scene.instantiate() as Slot
 	instance.data = ingredient
 	outputs_container.add_child(instance)
+	return instance
+
+
+func _on_input_slot_connected(slot: Slot) -> void:
 	pass
 
+
+func _on_output_slot_connected(slot: Slot) -> void:
+	pass
 #endregion Private Methods
