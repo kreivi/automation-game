@@ -83,6 +83,6 @@ static func get_ingredient_by_id(id: String, ingredients_path: String) -> Ingred
 	var path := ingredients_path.path_join(AutomationGameDataImporterUtils.id_to_resource_name(id) + ".tres")
 	var resource := ResourceLoader.load(path, "Resource", ResourceLoader.CACHE_MODE_IGNORE)
 	if not resource:
-		printerr("Failed to load ingredient: " + id)
+		push_warning("Could not load ingredient '%s'. Make sure ingredients exist in path: '%s' " % [id, ingredients_path])
 		return null
 	return resource as IngredientData

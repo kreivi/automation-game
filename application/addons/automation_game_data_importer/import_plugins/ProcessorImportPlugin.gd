@@ -97,6 +97,12 @@ func _import(source_file: String, save_path: String, options: Dictionary, platfo
 	var write_dir := options.get("WriteDirectory") as String
 	var recipes_dir := options.get("RecipesDirectory") as String
 	var ingredients_dir := options.get("IngredientsDirectory") as String
+	if not DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(ingredients_dir)) == false:
+		push_warning("Ingredients directory does not exist: '%s'" % ingredients_dir)
+		return ERR_FILE_NOT_FOUND
+	if not DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(recipes_dir)) == false:
+		push_warning("Recipes directory does not exist: '%s'" % recipes_dir)
+		return ERR_FILE_NOT_FOUND
 	var recreate := options.get("FullImport", false) as bool
 	var err = AutomationGameDataImporterUtils.make_write_directory(write_dir, recreate)
 	if err != OK: 

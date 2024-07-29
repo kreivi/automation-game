@@ -90,6 +90,10 @@ func _get_import_order() -> int:
 func _import(source_file: String, save_path: String, options: Dictionary, platform_variants: Array[String], gen_files: Array[String]) -> int:
 	var write_dir := options.get("WriteDirectory") as String
 	var ingredients_dir := options.get("IngredientsDirectory") as String
+	if not DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(ingredients_dir)) == false:
+		push_warning("Ingredients directory does not exist: '%s'" % ingredients_dir)
+		return ERR_FILE_NOT_FOUND
+		pass
 	var recreate := options.get("FullImport", false) as bool
 	var err = AutomationGameDataImporterUtils.make_write_directory(write_dir, recreate)
 	if err != OK: 
