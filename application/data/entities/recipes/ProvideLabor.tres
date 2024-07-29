@@ -1,24 +1,24 @@
-[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://d270firb4x2u5"]
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://745ltnn22w68"]
 
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_a7xq2"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_gvcue"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_d8xwc"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_hbg2h"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_ftig3"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_x37j8"]
 
-[sub_resource type="Resource" id="Resource_jynha"]
+[sub_resource type="Resource" id="Resource_u2cke"]
 resource_name = "Labor"
-script = ExtResource("1_a7xq2")
+script = ExtResource("1_hbg2h")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_w1i6y"]
-script = ExtResource("2_gvcue")
-ingredient = SubResource("Resource_jynha")
+[sub_resource type="Resource" id="Resource_vhvdo"]
+script = ExtResource("2_ftig3")
+ingredient = SubResource("Resource_u2cke")
 quantity = 1
 
 [resource]
 resource_name = "ProvideLabor"
-script = ExtResource("3_d8xwc")
-inputs = Array[ExtResource("2_gvcue")]([])
-outputs = Array[ExtResource("2_gvcue")]([SubResource("Resource_w1i6y")])
+script = ExtResource("3_x37j8")
+inputs = Array[ExtResource("2_ftig3")]([])
+outputs = Array[ExtResource("2_ftig3")]([SubResource("Resource_vhvdo")])
 ticks = 1
 id = "provideLabor"

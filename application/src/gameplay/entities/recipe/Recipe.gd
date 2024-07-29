@@ -10,8 +10,8 @@
 ## 
 class_name Recipe extends Control
 
-signal input_connected(ingredient: IngredientData)
-signal output_connected(ingredient: IngredientData)
+signal input_connected(recipe: RecipeData, ingredient: IngredientData)
+signal output_connected(recipe: RecipeData, ingredient: IngredientData)
 
 @export var data: RecipeData
 
@@ -59,6 +59,7 @@ func _init_output(ingredient: QuantitativeData) -> Slot:
 
 
 func _on_input_slot_connected(slot: Slot) -> void:
+	
 	pass
 
 

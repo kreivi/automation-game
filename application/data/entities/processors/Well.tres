@@ -1,66 +1,66 @@
-[gd_resource type="Resource" script_class="ProcessorData" load_steps=14 format=3 uid="uid://doco8c4ljlw5h"]
+[gd_resource type="Resource" script_class="ProcessorData" load_steps=14 format=3 uid="uid://nugi7x63eeb8"]
 
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_pvuuq"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_wsrun"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_6m3bk"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/ProcessorData.gd" id="4_fo4rp"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_igaca"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_5us11"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_6s5rb"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/ProcessorData.gd" id="4_oewjo"]
 
-[sub_resource type="Resource" id="Resource_axlb6"]
+[sub_resource type="Resource" id="Resource_bh3l7"]
 resource_name = "Labor"
-script = ExtResource("1_pvuuq")
+script = ExtResource("1_igaca")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_t0yp3"]
-script = ExtResource("2_wsrun")
-ingredient = SubResource("Resource_axlb6")
+[sub_resource type="Resource" id="Resource_vmapl"]
+script = ExtResource("2_5us11")
+ingredient = SubResource("Resource_bh3l7")
 quantity = 10
 
-[sub_resource type="Resource" id="Resource_vicrn"]
+[sub_resource type="Resource" id="Resource_7710c"]
 resource_name = "Water"
-script = ExtResource("1_pvuuq")
+script = ExtResource("1_igaca")
 type = 1
 id = "water"
 
-[sub_resource type="Resource" id="Resource_na6gm"]
-script = ExtResource("2_wsrun")
-ingredient = SubResource("Resource_vicrn")
+[sub_resource type="Resource" id="Resource_iw5vi"]
+script = ExtResource("2_5us11")
+ingredient = SubResource("Resource_7710c")
 quantity = 5
 
-[sub_resource type="Resource" id="Resource_m34lt"]
+[sub_resource type="Resource" id="Resource_kp11e"]
 resource_name = "Labor"
-script = ExtResource("1_pvuuq")
+script = ExtResource("1_igaca")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_tk1fx"]
-script = ExtResource("2_wsrun")
-ingredient = SubResource("Resource_m34lt")
+[sub_resource type="Resource" id="Resource_exo05"]
+script = ExtResource("2_5us11")
+ingredient = SubResource("Resource_kp11e")
 quantity = 10
 
-[sub_resource type="Resource" id="Resource_pofjm"]
+[sub_resource type="Resource" id="Resource_trs4e"]
 resource_name = "Water"
-script = ExtResource("1_pvuuq")
+script = ExtResource("1_igaca")
 type = 1
 id = "water"
 
-[sub_resource type="Resource" id="Resource_uvim3"]
-script = ExtResource("2_wsrun")
-ingredient = SubResource("Resource_pofjm")
+[sub_resource type="Resource" id="Resource_nomej"]
+script = ExtResource("2_5us11")
+ingredient = SubResource("Resource_trs4e")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_trpq7"]
+[sub_resource type="Resource" id="Resource_as0bs"]
 resource_name = "CollectWater"
-script = ExtResource("3_6m3bk")
-inputs = Array[ExtResource("2_wsrun")]([SubResource("Resource_tk1fx")])
-outputs = Array[ExtResource("2_wsrun")]([SubResource("Resource_uvim3")])
+script = ExtResource("3_6s5rb")
+inputs = Array[ExtResource("2_5us11")]([SubResource("Resource_exo05")])
+outputs = Array[ExtResource("2_5us11")]([SubResource("Resource_nomej")])
 ticks = 10
 id = "collectWater"
 
 [resource]
 resource_name = "Well"
-script = ExtResource("4_fo4rp")
-recipes = Array[ExtResource("3_6m3bk")]([SubResource("Resource_trpq7")])
-input_storages = Array[ExtResource("2_wsrun")]([SubResource("Resource_t0yp3")])
-output_storages = Array[ExtResource("2_wsrun")]([SubResource("Resource_na6gm")])
+script = ExtResource("4_oewjo")
+recipes = Array[ExtResource("3_6s5rb")]([SubResource("Resource_as0bs")])
+input_storages = Array[ExtResource("2_5us11")]([SubResource("Resource_vmapl")])
+output_storages = Array[ExtResource("2_5us11")]([SubResource("Resource_iw5vi")])
 id = "well"

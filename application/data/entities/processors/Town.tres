@@ -1,44 +1,44 @@
-[gd_resource type="Resource" script_class="ProcessorData" load_steps=10 format=3 uid="uid://dpojmj8fjppws"]
+[gd_resource type="Resource" script_class="ProcessorData" load_steps=10 format=3 uid="uid://df0cdaiy5ibaf"]
 
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_cc06c"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_prp6s"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_315sw"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/ProcessorData.gd" id="4_xujvb"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_vuy0m"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_wscfd"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_a6aon"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/ProcessorData.gd" id="4_eqnfm"]
 
-[sub_resource type="Resource" id="Resource_njy4e"]
+[sub_resource type="Resource" id="Resource_wjdvt"]
 resource_name = "Labor"
-script = ExtResource("1_cc06c")
+script = ExtResource("1_vuy0m")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_gde3v"]
-script = ExtResource("2_prp6s")
-ingredient = SubResource("Resource_njy4e")
+[sub_resource type="Resource" id="Resource_3oeqn"]
+script = ExtResource("2_wscfd")
+ingredient = SubResource("Resource_wjdvt")
 quantity = 10
 
-[sub_resource type="Resource" id="Resource_jynha"]
+[sub_resource type="Resource" id="Resource_u2cke"]
 resource_name = "Labor"
-script = ExtResource("1_cc06c")
+script = ExtResource("1_vuy0m")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_w1i6y"]
-script = ExtResource("2_prp6s")
-ingredient = SubResource("Resource_jynha")
+[sub_resource type="Resource" id="Resource_vhvdo"]
+script = ExtResource("2_wscfd")
+ingredient = SubResource("Resource_u2cke")
 quantity = 1
 
-[sub_resource type="Resource" id="Resource_btori"]
+[sub_resource type="Resource" id="Resource_0wmw7"]
 resource_name = "ProvideLabor"
-script = ExtResource("3_315sw")
-inputs = Array[ExtResource("2_prp6s")]([])
-outputs = Array[ExtResource("2_prp6s")]([SubResource("Resource_w1i6y")])
+script = ExtResource("3_a6aon")
+inputs = Array[ExtResource("2_wscfd")]([])
+outputs = Array[ExtResource("2_wscfd")]([SubResource("Resource_vhvdo")])
 ticks = 1
 id = "provideLabor"
 
 [resource]
 resource_name = "Town"
-script = ExtResource("4_xujvb")
-recipes = Array[ExtResource("3_315sw")]([SubResource("Resource_btori")])
-input_storages = Array[ExtResource("2_prp6s")]([])
-output_storages = Array[ExtResource("2_prp6s")]([SubResource("Resource_gde3v")])
+script = ExtResource("4_eqnfm")
+recipes = Array[ExtResource("3_a6aon")]([SubResource("Resource_0wmw7")])
+input_storages = Array[ExtResource("2_wscfd")]([])
+output_storages = Array[ExtResource("2_wscfd")]([SubResource("Resource_3oeqn")])
 id = "town"

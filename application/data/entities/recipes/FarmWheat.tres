@@ -1,46 +1,46 @@
-[gd_resource type="Resource" script_class="RecipeData" load_steps=10 format=3 uid="uid://bciw24rovw4y1"]
+[gd_resource type="Resource" script_class="RecipeData" load_steps=10 format=3 uid="uid://p7pwvm10ocqo"]
 
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_wsd6j"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_lurrw"]
-[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_iexe6"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/IngredientData.gd" id="1_xjviu"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/QuantitativeData.gd" id="2_houab"]
+[ext_resource type="Script" path="res://addons/automation_game_data_importer/resource_types/RecipeData.gd" id="3_futq1"]
 
-[sub_resource type="Resource" id="Resource_tonkl"]
+[sub_resource type="Resource" id="Resource_g08qo"]
 resource_name = "Labor"
-script = ExtResource("1_wsd6j")
+script = ExtResource("1_xjviu")
 type = 0
 id = "labor"
 
-[sub_resource type="Resource" id="Resource_fl2wj"]
-script = ExtResource("2_lurrw")
-ingredient = SubResource("Resource_tonkl")
+[sub_resource type="Resource" id="Resource_tbocp"]
+script = ExtResource("2_houab")
+ingredient = SubResource("Resource_g08qo")
 quantity = 20
 
-[sub_resource type="Resource" id="Resource_xdcyr"]
+[sub_resource type="Resource" id="Resource_ikmh3"]
 resource_name = "Water"
-script = ExtResource("1_wsd6j")
+script = ExtResource("1_xjviu")
 type = 1
 id = "water"
 
-[sub_resource type="Resource" id="Resource_tti46"]
-script = ExtResource("2_lurrw")
-ingredient = SubResource("Resource_xdcyr")
+[sub_resource type="Resource" id="Resource_t0fjl"]
+script = ExtResource("2_houab")
+ingredient = SubResource("Resource_ikmh3")
 quantity = 5
 
-[sub_resource type="Resource" id="Resource_rdqkq"]
+[sub_resource type="Resource" id="Resource_s8brs"]
 resource_name = "Wheat"
-script = ExtResource("1_wsd6j")
+script = ExtResource("1_xjviu")
 type = 2
 id = "wheat"
 
-[sub_resource type="Resource" id="Resource_msbra"]
-script = ExtResource("2_lurrw")
-ingredient = SubResource("Resource_rdqkq")
+[sub_resource type="Resource" id="Resource_6ytj3"]
+script = ExtResource("2_houab")
+ingredient = SubResource("Resource_s8brs")
 quantity = 1
 
 [resource]
 resource_name = "FarmWheat"
-script = ExtResource("3_iexe6")
-inputs = Array[ExtResource("2_lurrw")]([SubResource("Resource_fl2wj"), SubResource("Resource_tti46")])
-outputs = Array[ExtResource("2_lurrw")]([SubResource("Resource_msbra")])
+script = ExtResource("3_futq1")
+inputs = Array[ExtResource("2_houab")]([SubResource("Resource_tbocp"), SubResource("Resource_t0fjl")])
+outputs = Array[ExtResource("2_houab")]([SubResource("Resource_6ytj3")])
 ticks = 20
 id = "farmWheat"
